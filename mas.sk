@@ -189,10 +189,6 @@ function MAS_reset(loc: location):
 
     delete {MAS_%{_loc}%::stop}
     
-
-
-
-
 function MAS_result(a: number,b: number,loc: location):
     if {_a} is 0:
         set text of {MAS_E.%{_loc}%::5} to "&c... PERDU ..."
