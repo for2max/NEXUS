@@ -1,27 +1,21 @@
 on load:
-
     delete {MAS_list::*}
-
     add nether_star to {MAS_list::*}
     add enchanted_golden_apple to {MAS_list::*}
     add dragon_egg to {MAS_list::*}
     add beacon to {MAS_list::*}
-
     add totem_of_undying to {MAS_list::*}
     add heart_of_the_sea to {MAS_list::*}
     add conduit to {MAS_list::*}
     add bell to {MAS_list::*}
-
     add echo_shard to {MAS_list::*}
     add amethyst_shard to {MAS_list::*}
     add lodestone to {MAS_list::*}
     add respawn_anchor to {MAS_list::*}
-
     add end_crystal to {MAS_list::*}
     add shulker_shell to {MAS_list::*}
     add netherite_ingot to {MAS_list::*}
     add netherite_upgrade_smithing_template to {MAS_list::*}
-
     set {MAS_value::nether star} to 50
     set {MAS_value::enchanted golden apple} to 45
     set {MAS_value::dragon egg} to 60
@@ -40,7 +34,6 @@ on load:
     set {MAS_value::smithing template netherite upgrade} to 30
 
 function MAS_setholo(loc: location):
-
     spawn text display at {_loc}
     set {_e} to last spawned text display
     set transformation translation of {_e} to vector from 0, 0.30, -0.10
@@ -49,7 +42,6 @@ function MAS_setholo(loc: location):
     apply drop shadow to {_e}
     set color of {_e} to cyan
     set {MAS_E.%{_loc}%::4} to {_e}
-
     spawn text display at {_loc}
     set {_e} to last spawned text display
     set transformation translation of {_e} to vector from 0, -0.35, -0.10
@@ -59,17 +51,13 @@ function MAS_setholo(loc: location):
     set color of {_e} to red
     set {MAS_E.%{_loc}%::5} to {_e}
 
-
 on load:
     loop {MAS_POSTES::*}:
         MAS_reset(loop-value)
 
-    
-
 on right click on a lever:
     if {MAS_Levier.%location of event-block%} is set:
         set {_loc} to {MAS_Levier.%location of event-block%}
-
         if {MAS_%{_loc}%::stop} is not set:
             set {_mise} to {MAS_%{_loc}%::mise}
             if player's balance < {_mise}:
@@ -83,7 +71,6 @@ on right click on a lever:
         else:
             cancel event
             NO(player)
-
 
 command /mas <text> <number>:
     permission: admin
@@ -104,8 +91,6 @@ command /mas <text> <number>:
                 set {MAS_%location of target block%::mise} to arg 2
                 stop
 
-
-
 function MAS_setup(loc: location):
     set {_item} to random element of {MAS_list::*}
     loop 3 times:
@@ -122,10 +107,8 @@ function MAS_setup(loc: location):
         set {MAS_E.%{_loc}%::%loop-number%} to {_e}
 
 function MAS_tirage(loc: location,p: player,mise: number):
-
     set text of {MAS_E.%{_loc}%::4} to "&6%{_p}%"
     set text of {MAS_E.%{_loc}%::5} to "&bTIRAGE EN COURS"
-
     set {MAS_%{_loc}%::stop} to true
     set {_gain} to 0
     loop 130 times:
@@ -158,7 +141,6 @@ function MAS_tirage(loc: location,p: player,mise: number):
             wait 3 tick
         else:
             wait 1 tick
-
     if {_a} is {_b}:
         if {_b} is {_c}:
             play sound "ui.toast.challenge_complete" with volume 3 to {_p}
@@ -175,7 +157,6 @@ function MAS_tirage(loc: location,p: player,mise: number):
             MAS_result({_gain},{_bonus},{_loc})
             set glowing of {MAS_E.%{_loc}%::1} and {MAS_E.%{_loc}%::2} to true
             set glow color override of {MAS_E.%{_loc}%::1} and {MAS_E.%{_loc}%::2} to yellow
- 
     else:
         if {_b} is {_c}:
             set {_gain} to 7*{_mise}
@@ -197,7 +178,6 @@ function MAS_tirage(loc: location,p: player,mise: number):
     MAS_reset({_loc})
 
 function MAS_reset(loc: location):
-    
     Delete_Entity({_loc}, 2)
     loop {MAS_E.%{_loc}%::*}:
         kill loop-value
@@ -222,7 +202,6 @@ function MAS_result(a: number,b: number,loc: location):
 command /te:
     trigger:
         set {_loc} to first element of {MAS_POSTES::*}
-    
         spawn item display at {_loc}
         set {_e} to last spawned item display
         set item of last spawned item display to paper
